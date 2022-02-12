@@ -1,0 +1,5 @@
+node_modules
+test
+type
+.prettierrc
+*package-lock.json
