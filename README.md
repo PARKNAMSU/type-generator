@@ -33,7 +33,7 @@ typeGenerator.generator(fileName,data,typeName);
 ## 타입 스크립트 Config 파일 생성 메서드
 
 ```typescript
-typeGen.configGenerator.generateConfig(include,exclude,options);
+typeGenerator.configGenerator.generateConfig(include,exclude,options);
 ```
 
 * include : include 옵션에 사용할 변환할 타입스크립트 파일 목륵(배열로 전달)
