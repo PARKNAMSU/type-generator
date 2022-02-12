@@ -1,4 +1,4 @@
-import fs from "fs";
+let fs = require("fs");
 
 interface ConfigOptions {
   target: string;
@@ -83,3 +83,8 @@ class ConfigGenerator {
 
 export default ConfigGenerator.getInstance();
 export { ConfigGenerator };
+
+module.exports = {
+  configGenerator: ConfigGenerator.getInstance(),
+  ConfigGenerator,
+};

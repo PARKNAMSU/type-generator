@@ -1,9 +1,12 @@
-import fs from "fs";
-import configGenerator, { ConfigGenerator } from "./methods/configGenerator";
-import objectGenerator, { ObjectGenerator } from "./methods/objectGenerator";
+// import configGenerator, { ConfigGenerator } from "./methods/configGenerator";
+// import objectGenerator, { ObjectGenerator } from "./methods/objectGenerator";
+let { objectGenerator, ObjectGenerator } = require("./methods/objectGenerator");
+let { configGenerator, ConfigGenerator } = require("./methods/configGenerator");
+let fs = require("fs");
+// typeScript 타입 생성기
 class TypeGenerator {
   static instance: TypeGenerator;
-  configGenerator: ConfigGenerator = configGenerator;
+  configGenerator = configGenerator;
   static getInstance(): TypeGenerator {
     if (!this.instance) this.instance = new TypeGenerator();
 
@@ -33,6 +36,12 @@ class TypeGenerator {
     fs.closeSync(file);
   }
 
+  /*
+    Type 생성 메서드
+    
+    data: 파싱할 데이터
+    typeName: 인터페이스 이름
+  */
   private makeType(data: Object | any, typeName: string): string {
     let type = `interface ${typeName}{\n`;
     for (let key in data) {

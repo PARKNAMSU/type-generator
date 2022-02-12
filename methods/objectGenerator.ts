@@ -6,7 +6,12 @@ class ObjectGenerator {
     return this.instance;
   }
 
-  // 배열 타입 생성기
+  /*
+    배열 타입 생성기
+    
+    arr: 배열
+    key: 프로퍼티 키
+  */
   generateArrayType(arr: Array<any>, key: string): string {
     let returnStr: string = `\t${key}:Array<`;
 
@@ -69,3 +74,8 @@ class ObjectGenerator {
 
 export default ObjectGenerator.getInstance();
 export { ObjectGenerator };
+
+module.exports = {
+  objectGenerator: ObjectGenerator.getInstance(),
+  ObjectGenerator,
+};
