@@ -8,6 +8,7 @@ interface ConfigOptions {
   isStrict: boolean;
 }
 
+// tsConfig 생성기 - 미완
 class ConfigGenerator {
   static instance: ConfigGenerator;
   static getInstance(): ConfigGenerator {
@@ -68,6 +69,7 @@ class ConfigGenerator {
     fs.closeSync(file);
     return true;
   }
+
   private arrayToString(array: Array<any>) {
     let a = `[`;
     array.forEach((item) => {

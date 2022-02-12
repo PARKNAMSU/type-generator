@@ -1,6 +1,6 @@
 import fs from "fs";
 import configGenerator, { ConfigGenerator } from "./methods/configGenerator";
-
+import objectGenerator, { ObjectGenerator } from "./methods/objectGenerator";
 class TypeGenerator {
   static instance: TypeGenerator;
   configGenerator: ConfigGenerator = configGenerator;
@@ -9,6 +9,14 @@ class TypeGenerator {
 
     return this.instance;
   }
+
+  /*
+    타입 생성기
+
+    fileName: 저장할 파일 이름
+    data: 타입 생성할 객체
+    typeName: 인터페이스 이름
+  */
   generator(fileName: string, data: any, typeName: string) {
     let exist: boolean = fs.existsSync("./type/" + fileName);
     let existDir: boolean = fs.existsSync("./type");
@@ -19,17 +27,12 @@ class TypeGenerator {
     let file = fs.openSync("./type/" + fileName, "a+");
 
     let read = fs.readFileSync("./type/" + fileName, "utf8");
-    console.log(read);
     if (!read.includes("interface " + typeName))
       fs.appendFileSync("./type/" + fileName, this.makeType(data, typeName));
 
     fs.closeSync(file);
   }
-  private generateArrayType(arr: Array<any>, key: string): string {
-    let returnStr = "\t";
-    let ckType = arr[0];
-    return `\t${key}:Array<any>;\n`;
-  }
+
   private makeType(data: Object | any, typeName: string): string {
     let type = `interface ${typeName}{\n`;
     for (let key in data) {
@@ -39,10 +42,11 @@ class TypeGenerator {
           .slice(8, -1);
         switch (propertyType) {
           case "Array":
-            type += this.generateArrayType(data[key], key);
+            type += objectGenerator.generateArrayType(data[key], key);
             break;
           case "Function":
-            console.log(data[key].toString());
+            console.log("fn");
+            type += objectGenerator.generateFunctionType(data[key].toString());
             break;
           default:
             type += `\t${key}:${propertyType};\n`;
