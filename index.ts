@@ -56,3 +56,5 @@ class TypeGenerator {
 }
 
 export default TypeGenerator.getInstance();
+
+export { TypeGenerator };
