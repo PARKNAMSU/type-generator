@@ -6,13 +6,13 @@
 
 ### Require 함수
 
-```javascript
+```typescript
 let typeGenerator = require("./type-generator/index");
 ```
 
 ### ES6 모듈
 
-```javascript
+```typescript
 import typeGenerator from "./type-generator/index";
 ```
 
@@ -20,7 +20,7 @@ import typeGenerator from "./type-generator/index";
 
 ## 타입 스크립트 타입 생성 메서드
 
-```javascript
+```typescript
 typeGenerator.generator(fileName,data,typeName);
 ```
 
@@ -32,7 +32,7 @@ typeGenerator.generator(fileName,data,typeName);
 
 ## 타입 스크립트 Config 파일 생성 메서드
 
-```javascript
+```typescript
 typeGen.configGenerator.generateConfig(include,exclude,options);
 ```
 
@@ -42,7 +42,7 @@ typeGen.configGenerator.generateConfig(include,exclude,options);
 
 **옵션**
 
-```
+```typescript
 interface ConfigOptions {
   target: string; // ECMA 자바스크립트 버전
   outDir: string; // javascript 로 파싱한 파일 저장할 폴더
