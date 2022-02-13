@@ -71,3 +71,5 @@ class TypeGenerator {
 export default TypeGenerator.getInstance();
 
 export { TypeGenerator };
+
+module.exports = { TypeGenerator, typeGene: TypeGenerator.getInstance() };
