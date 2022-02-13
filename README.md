@@ -4,16 +4,22 @@
 
 ## 모듈 호출
 
+### NPM Install
+
+```
+npm install type-gene
+```
+
 ### Require 함수
 
 ```typescript
-let typeGenerator = require("./type-generator/index");
+let typeGenerator = require("type-gene");
 ```
 
 ### ES6 모듈
 
 ```typescript
-import typeGenerator from "./type-generator/index";
+import typeGenerator from "type-gene";
 ```
 
 <br>
