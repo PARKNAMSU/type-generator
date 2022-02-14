@@ -1,20 +1,27 @@
-// import configGenerator, { ConfigGenerator } from "./methods/configGenerator";
-// import objectGenerator, { ObjectGenerator } from "./methods/objectGenerator";
-let { objectGenerator, ObjectGenerator } = require("./methods/objectGenerator");
-let { configGenerator, ConfigGenerator } = require("./methods/configGenerator");
-let { tsAuthInstall, TsAuthInstall } = require("./methods/tsAuthInstall");
+import { ConfigGenerator } from "./methods/configGenerator";
+import { ObjectGenerator } from "./methods/objectGenerator";
+import { TsAutoInstall } from "./methods/tsAutoInstall";
+let { objectGenerator } = require("./methods/objectGenerator");
+let configGenerator: ConfigGenerator = require("./methods/configGenerator");
+let tsAutoInstall = require("./methods/tsAutoInstall");
 let fs = require("fs");
+
+interface ConfigOptions {
+  target: string;
+  outDir: string;
+  lib?: Array<string>;
+  module?: string;
+  isStrict: boolean;
+}
+
 // typeScript 타입 생성기
 class TypeGenerator {
   static instance: TypeGenerator;
-  configGenerator = configGenerator;
-  tsAuthInstall = tsAuthInstall;
   static getInstance(): TypeGenerator {
     if (!this.instance) this.instance = new TypeGenerator();
 
     return this.instance;
   }
-
   /*
     타입 생성기
 
@@ -37,7 +44,16 @@ class TypeGenerator {
 
     fs.closeSync(file);
   }
-
+  generatorConfig(
+    include: Array<string>,
+    exclude: Array<string>,
+    options: ConfigOptions
+  ) {
+    configGenerator.generateConfig(include, exclude, options);
+  }
+  setTsModule(installOption: string = "N") {
+    tsAutoInstall.setTsModule(installOption);
+  }
   /*
     Type 생성 메서드
     
@@ -56,7 +72,6 @@ class TypeGenerator {
             type += objectGenerator.generateArrayType(data[key], key);
             break;
           case "Function":
-            console.log("fn");
             type += objectGenerator.generateFunctionType(data[key].toString());
             break;
           default:
@@ -74,4 +89,4 @@ export default TypeGenerator.getInstance();
 
 export { TypeGenerator };
 
-module.exports = { TypeGenerator, typeGene: TypeGenerator.getInstance() };
+module.exports = TypeGenerator.getInstance();
