@@ -11,19 +11,19 @@ class ConfigGenerator {
     }
     generateConfig(include, exclude, options) {
         let configStr = `{
-          "compilerOptions": {
-            "allowJs": true,
-            "moduleResolution": "Node",
-            "esModuleInterop": true,
-        `;
+ "compilerOptions": {
+    "allowJs": true,
+    "moduleResolution": "Node",
+    "esModuleInterop": true,
+    `;
         let strictStr = `
-        "strict": true,
-        "strictNullChecks": true,
-        "strictFunctionTypes": true,
-        "strictBindCallApply": true,
-        "strictPropertyInitialization": true,
-        "noImplicitThis": true,
-        "alwaysStrict": true,`;
+    "strict": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "strictBindCallApply": true,
+    "strictPropertyInitialization": true,
+    "noImplicitThis": true,
+    "alwaysStrict": true,`;
         let libStr = `["ES2015", "DOM", "DOM.Iterable"]`;
         let moduleStr = `"module": "commonjs"`;
         for (let key in options) {
@@ -61,7 +61,6 @@ class ConfigGenerator {
     arrayToString(array) {
         let a = `[`;
         array.forEach((item) => {
-            console.log(item);
             a += `"${item}",`;
         });
         a += `]`;
@@ -69,8 +68,5 @@ class ConfigGenerator {
     }
 }
 exports.ConfigGenerator = ConfigGenerator;
+module.exports = ConfigGenerator.getInstance();
 exports.default = ConfigGenerator.getInstance();
-module.exports = {
-    configGenerator: ConfigGenerator.getInstance(),
-    ConfigGenerator,
-};

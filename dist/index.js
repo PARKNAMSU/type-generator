@@ -1,18 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.TypeGenerator = void 0;
-// import configGenerator, { ConfigGenerator } from "./methods/configGenerator";
-// import objectGenerator, { ObjectGenerator } from "./methods/objectGenerator";
-let { objectGenerator, ObjectGenerator } = require("./methods/objectGenerator");
-let { configGenerator, ConfigGenerator } = require("./methods/configGenerator");
-let { tsAuthInstall, TsAuthInstall } = require("./methods/tsAuthInstall");
+let { objectGenerator } = require("./methods/objectGenerator");
+let configGenerator = require("./methods/configGenerator");
+let tsAutoInstall = require("./methods/tsAutoInstall");
 let fs = require("fs");
 // typeScript 타입 생성기
 class TypeGenerator {
-    constructor() {
-        this.configGenerator = configGenerator;
-        this.tsAuthInstall = tsAuthInstall;
-    }
     static getInstance() {
         if (!this.instance)
             this.instance = new TypeGenerator();
@@ -38,6 +32,12 @@ class TypeGenerator {
             fs.appendFileSync("./type/" + fileName, this.makeType(data, typeName));
         fs.closeSync(file);
     }
+    generatorConfig(include, exclude, options) {
+        configGenerator.generateConfig(include, exclude, options);
+    }
+    setTsModule(installOption = "N") {
+        tsAutoInstall.setTsModule(installOption);
+    }
     /*
       Type 생성 메서드
       
@@ -56,7 +56,6 @@ class TypeGenerator {
                         type += objectGenerator.generateArrayType(data[key], key);
                         break;
                     case "Function":
-                        console.log("fn");
                         type += objectGenerator.generateFunctionType(data[key].toString());
                         break;
                     default:
@@ -73,4 +72,4 @@ class TypeGenerator {
 }
 exports.TypeGenerator = TypeGenerator;
 exports.default = TypeGenerator.getInstance();
-module.exports = { TypeGenerator, typeGene: TypeGenerator.getInstance() };
+module.exports = TypeGenerator.getInstance();

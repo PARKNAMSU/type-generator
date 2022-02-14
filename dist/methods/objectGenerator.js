@@ -57,7 +57,6 @@ class ObjectGenerator {
             }
             returnStr += `${fnToStr.slice(sliceIdx + 1, commIdx)}: any ,`;
             sliceIdx = commIdx + 1;
-            console.log(returnStr);
         }
         return returnStr;
     }

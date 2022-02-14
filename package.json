@@ -1,6 +1,6 @@
 {
   "name": "type-gene",
-  "version": "0.1.5-beta",
+  "version": "0.1.6-beta",
   "description": "Typescript Type Generator",
   "main": "./dist/index.js",
   "types": "index.ts",

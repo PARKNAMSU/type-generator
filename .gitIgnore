@@ -3,3 +3,4 @@ test
 type
 .prettierrc
 *package-lock.json
+dist
