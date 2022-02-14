@@ -44,7 +44,7 @@ class TypeGenerator {
 
     fs.closeSync(file);
   }
-  generatorConfig(
+  generateConfig(
     include: Array<string>,
     exclude: Array<string>,
     options: ConfigOptions
