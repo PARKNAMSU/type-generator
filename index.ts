@@ -2,11 +2,13 @@
 // import objectGenerator, { ObjectGenerator } from "./methods/objectGenerator";
 let { objectGenerator, ObjectGenerator } = require("./methods/objectGenerator");
 let { configGenerator, ConfigGenerator } = require("./methods/configGenerator");
+let { tsAuthInstall, TsAuthInstall } = require("./methods/tsAuthInstall");
 let fs = require("fs");
 // typeScript 타입 생성기
 class TypeGenerator {
   static instance: TypeGenerator;
   configGenerator = configGenerator;
+  tsAuthInstall = tsAuthInstall;
   static getInstance(): TypeGenerator {
     if (!this.instance) this.instance = new TypeGenerator();
 
