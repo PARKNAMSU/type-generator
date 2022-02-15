@@ -1,4 +1,4 @@
-# TypeScript Type Generator(개발중)
+# TypeScript Type Generator
 
 <br>
 
