@@ -39,8 +39,18 @@ class TypeGenerator {
     let file = fs.openSync("./type/" + fileName, "a+");
 
     let read = fs.readFileSync("./type/" + fileName, "utf8");
-    if (!read.includes("interface " + typeName))
-      fs.appendFileSync("./type/" + fileName, this.makeType(data, typeName));
+    if (!read.includes("interface " + typeName)) {
+      let tempSub = fileName.split(".");
+      tempSub.length === 3 && tempSub[1] === "d"
+        ? fs.appendFileSync(
+            "./type/" + fileName,
+            this.makeType(data, typeName, true)
+          )
+        : fs.appendFileSync(
+            "./type/" + fileName,
+            this.makeType(data, typeName)
+          );
+    }
 
     fs.closeSync(file);
   }
@@ -60,8 +70,14 @@ class TypeGenerator {
     data: 파싱할 데이터
     typeName: 인터페이스 이름
   */
-  private makeType(data: Object | any, typeName: string): string {
-    let type = `interface ${typeName}{\n`;
+  private makeType(
+    data: Object | any,
+    typeName: string,
+    isGlobal: boolean = false
+  ): string {
+    let type = isGlobal
+      ? `declare interface ${typeName}{\n`
+      : `interface ${typeName}{\n`;
     for (let key in data) {
       if (["object", "function"].includes(typeof data[key])) {
         let propertyType = Object.prototype.toString
